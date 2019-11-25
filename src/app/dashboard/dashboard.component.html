@@ -1,16 +1,28 @@
 
 <div class="chart-wrapper">
     <canvas baseChart 
-        [datasets]="lineChartData" 
-        [labels]="lineChartLabels" 
-        [options]="lineChartOptions"
-        [colors]="lineChartColors" 
+        [datasets]="investimentsData" 
+        [labels]="investmentLabels" 
+        [options]="chartOptions"
         [legend]="lineChartLegend" 
         [chartType]="lineChartType" 
         [plugins]="lineChartPlugins">
     </canvas>
 
     <div *ngFor="let item of cardContents" class="card">
+        {{item.label}} {{item.value | currency}} ({{item.percent}}%)
+    </div>
+
+    <canvas baseChart 
+        [datasets]="typesData" 
+        [labels]="typesLabels" 
+        [options]="chartOptions"
+        [legend]="lineChartLegend" 
+        [chartType]="lineChartType" 
+        [plugins]="lineChartPlugins">
+    </canvas>
+
+    <div *ngFor="let item of cardContents2" class="card">
         {{item.label}} {{item.value | currency}} ({{item.percent}}%)
     </div>
 </div>
