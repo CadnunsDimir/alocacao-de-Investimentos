@@ -5,19 +5,19 @@ import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NewBankComponent } from './new-bank/new-bank.component';
 
 const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
-  { path: '',
-    redirectTo: '/dashboard',
-    pathMatch: 'full'
-  },
+  { path: 'new-bank', component: NewBankComponent },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    NewBankComponent
   ],
   imports: [
     BrowserModule,
