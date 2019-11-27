@@ -1,6 +1,16 @@
+<nav>
+  <button class="btn-menu-icon" (click)="exibirMenu = true" aria-label="exibir menu"></button>
+  <ul *ngIf="exibirMenu" class="menu"  (click)="exibirMenu = false" aria-expanded="true">
+    <li><a [routerLink]="['/']" class="menu-item">Página inicial</a></li>
+    <li><a [routerLink]="['/new-bank']" class="menu-item">Cadastrar Banco</a></li>
+    <li><a class="menu-item">fechar menu</a></li>
+  </ul>
+</nav>
+
 <header class="header-place">
   <h1 class="header">{{ title }}</h1>
 </header>
+
 <main>
   <router-outlet></router-outlet>
 </main>
