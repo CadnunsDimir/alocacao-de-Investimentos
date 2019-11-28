@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
-import { BankList, banksExample } from '../shared/entities/bank.entities';
+import { BankList, banksExample, Bank } from '../shared/entities/bank.entities';
 import { AppComponent } from '../app.component';
+import { BankStorageService } from '../shared/services/bank-storage/bank-storage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,11 +33,25 @@ export class DashboardComponent implements OnInit {
   typesLabels: Label[];
   cardContents2: { label: Label; value: number; percent: number; }[];
 
-  constructor(private app: AppComponent) {
+  constructor(private app: AppComponent, private storage: BankStorageService) {
 
     this.app.title = 'Meus Investimentos';
     
-    this.bankList = new BankList(banksExample);
+    this.updateValues(new BankList([]));
+
+    this.storage.$banks.subscribe(banks =>{
+      this.updateValues(banks);
+    });
+  }
+
+  valuesAndPercentual(dataValues: number[]) {
+    const sum = dataValues.reduce((acc, value)=> acc + value);
+    const dataPercentual = dataValues.map((value) => parseInt((value / sum * 10000).toString()) / 100);
+    return {values: dataValues, percentuals: dataPercentual};
+  }
+
+  updateValues(banks: BankList){
+    this.bankList = banks;
     console.log(JSON.stringify(this.bankList));
 
     this.investmentLabels = ['ações', 'CDB', 'poupança', 'TD', 'saldo contas'];
@@ -55,14 +70,7 @@ export class DashboardComponent implements OnInit {
 
     this.typesLabels = ['renda fixa', 'renda variavel'];
 
-    this.cardContents2 = this.cards(this.typesLabels, infos2.percentuals, infos2.values)
-    
-  }
-
-  valuesAndPercentual(dataValues: number[]) {
-    const sum = dataValues.reduce((acc, value)=> acc + value);
-    const dataPercentual = dataValues.map((value) => parseInt((value / sum * 10000).toString()) / 100);
-    return {values: dataValues, percentuals: dataPercentual};
+    this.cardContents2 = this.cards(this.typesLabels, infos2.percentuals, infos2.values);
   }
 
   cards(labels: Label[], perc: number[], values: number[]) {
@@ -75,5 +83,12 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  indice = 0;
+
+  adicionaBancoFake() {
+    this.storage.insertBank(banksExample[this.indice % banksExample.length]);
+    this.indice++;
   }
 }

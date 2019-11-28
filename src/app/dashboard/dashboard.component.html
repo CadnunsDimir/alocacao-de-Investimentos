@@ -25,4 +25,5 @@
     <div *ngFor="let item of cardContents2" class="card">
         {{item.label}} {{item.value | currency}} ({{item.percent}}%)
     </div>
+    <button (click)="adicionaBancoFake()">add banco fake</button>
 </div>
