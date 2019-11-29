@@ -1,1 +1,14 @@
-<p>my-accounts works!</p>
+<div *ngIf="$banks | async as banksList" class="placeholder">
+    <div class="card">
+        <div class="card-header">Patrimonio total: {{ banksList.total }}</div>
+        <div class="card-list-item" *ngFor="let account of banksList.banks">
+            <p class="label">Intituição</p>
+            <p class="bank-name">{{ account.name }}</p>
+            <p class="label">Valor investido</p>
+            <p class="total-value">{{ banksList.totalFromBank(account) }}</p>
+            <button [attr.aria-label]="(account.verMenos? 'ver menos': 'ver mais')" 
+                class="btn-show-more"
+                (click)="account.verMenos = !account.verMenos">{{(account.verMenos? '-': '+')}}</button>
+        </div>
+    </div>
+</div>

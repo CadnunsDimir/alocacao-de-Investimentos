@@ -35,7 +35,7 @@ export class BankList {
 
         let sum = 0;
         this.banks.forEach(b => sum += b ? selectField(b) : 0);
-        return sum;
+        return this.toDecimal(sum);
     }
 
     get stockAmount() { return this.sum(b => b.stockAmount);}
@@ -44,10 +44,14 @@ export class BankList {
     get treasuryBondsAmount() { return this.sum(b => b.treasuryBondsAmount); }
     get accountBalance() { return this.sum(b => b.accountBalance); }
     get fixedeIncomeAmount() {
-        return this.depositaryReceiptAmount + this.savingsAmount + this.treasuryBondsAmount;
+        return this.toDecimal(this.depositaryReceiptAmount + this.savingsAmount + this.treasuryBondsAmount);
     }
     get variableIncomeAmount() {
-        return this.stockAmount;
+        return this.toDecimal(this.stockAmount);
+    }
+
+    private toDecimal(value: number){
+        return parseInt((value * 100).toString()) / 100;
     }
 
     get total() {
@@ -55,6 +59,10 @@ export class BankList {
 
         let sum = 0;
         this.banks.forEach(b => sum += (b.stockAmount + b.depositaryReceiptAmount + b.savingsAmount + b.treasuryBondsAmount + b.accountBalance));
-        return sum;
+        return this.toDecimal(sum);
+    }
+
+    totalFromBank(bank: Bank){
+        return this.toDecimal(bank.stockAmount + bank.depositaryReceiptAmount + bank.savingsAmount + bank.treasuryBondsAmount + bank.accountBalance);
     }
 }

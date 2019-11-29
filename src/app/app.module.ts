@@ -9,6 +9,7 @@ import { MyAccountsComponent } from './my-accounts/my-accounts.component';
 
 const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'my-accounts', component: MyAccountsComponent },
   { path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full'

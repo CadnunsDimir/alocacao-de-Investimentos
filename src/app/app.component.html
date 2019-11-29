@@ -3,6 +3,7 @@
   <ul *ngIf="exibirMenu" class="menu"  (click)="exibirMenu = false" aria-expanded="true">
     <li><a [routerLink]="['/']" class="menu-item">Página inicial</a></li>
     <li><a [routerLink]="['/new-bank']" class="menu-item">Cadastrar Banco</a></li>
+    <li><a [routerLink]="['/my-accounts']" class="menu-item">Minhas Contas</a></li>
     <li><a class="menu-item">fechar menu</a></li>
   </ul>
 </nav>
