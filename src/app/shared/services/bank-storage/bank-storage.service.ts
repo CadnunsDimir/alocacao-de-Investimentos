@@ -46,14 +46,13 @@ export class BankStorageService {
 
   updateBankByName(oldName: String, bank: Bank){
     const banks = this.bankListFromStorage();
-    banks.forEach(i => {
-      if(i.name === oldName){
-        i.accountBalance = bank.accountBalance;
-        i.depositaryReceiptAmount = bank.depositaryReceiptAmount;
-        i.name = bank.name;
-        i.savingsAmount = bank.savingsAmount;
-        i.stockAmount = bank.stockAmount;
-        i.treasuryBondsAmount = bank.treasuryBondsAmount;
+    banks.forEach(dbEntity => {
+      if(dbEntity.name === oldName){
+        for (const campo in dbEntity) {
+          if (dbEntity.hasOwnProperty(campo)) {
+            dbEntity[campo] = bank[campo];
+          }
+        }
       }
     });
     this.saveListOnStorage(banks);
