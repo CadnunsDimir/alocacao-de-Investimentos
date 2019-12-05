@@ -31,12 +31,14 @@ export class BankList {
     }
 
     private sum(selectField: (b: Bank) => number): number {
+        if(this.banks == null || this.banks.length == 0) return 0;
+
         let sum = 0;
-        this.banks.forEach(b => sum += selectField(b));
+        this.banks.forEach(b => sum += b ? selectField(b) : 0);
         return sum;
     }
 
-    get stockAmount() { return this.sum(b => b.stockAmount); }
+    get stockAmount() { return this.sum(b => b.stockAmount);}
     get depositaryReceiptAmount() { return this.sum(b => b.depositaryReceiptAmount); }
     get savingsAmount() { return this.sum(b => b.savingsAmount); }
     get treasuryBondsAmount() { return this.sum(b => b.treasuryBondsAmount); }
@@ -49,6 +51,8 @@ export class BankList {
     }
 
     get total() {
+        if(this.banks == null || this.banks.length == 0) return 0;
+
         let sum = 0;
         this.banks.forEach(b => sum += (b.stockAmount + b.depositaryReceiptAmount + b.savingsAmount + b.treasuryBondsAmount + b.accountBalance));
         return sum;
