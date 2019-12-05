@@ -19,8 +19,4 @@ export class MyAccountsComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  total(bank: Bank){
-    return bank.stockAmount + bank.depositaryReceiptAmount + bank.savingsAmount + bank.treasuryBondsAmount + bank.accountBalance;
-  }
 }
