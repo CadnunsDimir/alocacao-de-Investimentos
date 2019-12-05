@@ -1,15 +1,9 @@
-<form>
-    <input class="campo-texto" type="text" placeholder="Nome da Instituição:">
-    <br />
-    <input class="campo-texto" type="number" placeholder="Açôes:">
-    <br />
-    <input class="campo-texto" type="number" placeholder="CDB:">
-    <br />
-    <input class="campo-texto" type="number" placeholder="Poupança:">
-    <br />
-    <input class="campo-texto" type="number" placeholder="Tesouro Direto:">
-    <br />
-    <input class="campo-texto" type="number" placeholder="Saldo conta:">
-    <br/>
-    <button class="button" type="submit">Salvar</button>
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <input class="campo-texto" type="text" placeholder="Nome da Instituição:" formControlName="name">    
+    <input class="campo-texto" type="number" placeholder="Açôes:" formControlName="stockAmount">    
+    <input class="campo-texto" type="number" placeholder="CDB:" formControlName="depositaryReceiptAmount">    
+    <input class="campo-texto" type="number" placeholder="Poupança:" formControlName="savingsAmount">    
+    <input class="campo-texto" type="number" placeholder="Tesouro Direto:" formControlName="treasuryBondsAmount">    
+    <input class="campo-texto" type="number" placeholder="Saldo conta:" formControlName="accountBalance">
+    <button class="btn-submit" type="submit">Salvar</button>
   <form>

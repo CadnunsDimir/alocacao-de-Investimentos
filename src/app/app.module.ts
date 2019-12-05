@@ -6,6 +6,7 @@ import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewBankComponent } from './new-bank/new-bank.component';
+import { FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -22,12 +23,18 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     ChartsModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(
       appRoutes,
       // { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [],
+  exports: [
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
